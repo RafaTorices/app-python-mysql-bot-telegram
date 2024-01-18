@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>TELEGRAM BOT</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+  <div>
+    <h1>
+      TELEGRAM BOT
+      <br>
+      <span>
+        {{ titulo }}
+      </span>
+    </h1>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('getWebhookInfo_') }}">WebhookInfo</a></li>
+        <li><a href="{{ url_for('listado_usuarios_') }}">Usuarios</a></li>
+        <li><a href="{{ url_for('listado_opciones_') }}">Opciones</a></li>
+        <li><a href="{{ url_for('estado_servicio_') }}">Servicio</a></li>
+        <li><a href="{{ url_for('enviar_mensajes_') }}">Enviar Mensajes</a></li>
+        <li><a href="{{ url_for('listado_mensajes_') }}">Listado de Mensajes</a></li>
+      </ul>
+    </nav>
+    <p>
+      {% block content %}
+    <h2>Home Page</h2>
+    {% endblock %}
+    </p>
+    {% if respuesta %}
+    <div style="color: gold;">{{ respuesta }}</div>
+    {% endif %}
+  </div>
+</body>
+
+</html>

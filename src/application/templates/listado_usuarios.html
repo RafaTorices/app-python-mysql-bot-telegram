@@ -1,0 +1,54 @@
+{% extends "home.html" %}
+{% block content %}
+<h2>Listado de Usuarios</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>FIRST_NAME</th>
+      <th>USERNAME</th>
+      <th>ESTADO</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if usuarios %}
+    {% for usuario in usuarios %}
+    <tr>
+      <form action="{{ url_for('activar_desactivar_usuario_') }}" method="post">
+        <td>
+          <input type="hidden" name="id" value="{{ usuario[0] }}">
+          <input type="hidden" name="chatId" value="{{ usuario[1] }}">
+          <input type="hidden" name="first_name" value="{{ usuario[2] }}">
+          <p>{{ usuario[2] }}</p>
+        </td>
+        <td>
+          <p>{{ usuario[3] }}</p>
+        </td>
+        <td>
+          {% if (usuario[4] == 1) and (usuario[5] == 0) %}
+          <p style="color: greenyellow;">Activo</p>
+          <input type="hidden" name="estado" value="1">
+          {% else %}
+          <p style="color: red;">Inactivo</p>
+          <input type="hidden" name="estado" value="0">
+          {% endif %}
+        </td>
+        <td>
+          {% if (usuario[4] == 1) and (usuario[5] == 0) %}
+          <button type="submit">Desactivar</button>
+          {% else %}
+          <button type="submit">Activar</button>
+          {% endif %}
+        </td>
+      </form>
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% if mensaje %}
+  <div style="color: gold;">{{ mensaje }}</div>
+  {% endif %}
+  {% else %}
+  <div>No hay usuarios</div>
+  {% endif %}
+</table>
+{% endblock %}
